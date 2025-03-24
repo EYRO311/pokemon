@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Card Generator</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="pokemon.css" />
+</head>
+<body>
+    <div class="container">
+        <div id="card"></div>
+        <button id="btn">Generar Aleatorio</button>
+
+        <!-- Switch para alternar entre botones y buscador -->
+        <div class="switch-container">
+            <label class="switch">
+                <input type="checkbox" id="toggleSwitch">
+                <span class="slider"></span>
+            </label>
+            <p>Activar Buscador</p>
+        </div>
+
+        <!-- Buscador por texto -->
+        <div id="search-container" style="display: none;">
+            <div class="search-box">
+                <input type="text" id="searchInput" list="pokemon-list" placeholder="Busca tu Pokémon">
+                <datalist id="pokemon-list"></datalist>
+                <button id="searchButton">Buscar</button>
+            </div>
+        </div>
+
+        <div class="region-buttons">
+            <button id="btnk">Kanto</button>
+            <button id="btnj">Johto</button>
+            <button id="btnh">Hoenn</button>
+            <button id="btns">Sinnoh</button>
+            <button id="btnu">Unova</button>
+            <button id="btnka">Kalos</button>
+            <button id="btna">Alola</button>
+            <button id="btng">Galar</button>
+            <button id="btnp">Paldea</button>
+        </div>
+    </div>
+    <script src="pokemon.js"></script>
+</body>
+</html>
