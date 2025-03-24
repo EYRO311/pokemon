@@ -202,6 +202,7 @@ let generateCard = (data) => {
               </div>
           </div>
       </div>
+      <button class="btn-seleccionar">Seleccionar</button>
   `;
 
   appendTypes(data.types, cardElement);
@@ -226,7 +227,7 @@ let appendTypes = (types, cardElement) => {
 
 // Estilo de la carta
 let styleCard = (color, cardElement) => {
-  cardElement.style.background = `radial-gradient(circle at 50% 0%, ${color} 36%, #ffffff 36%)`;
+  cardElement.style.background = `radial-gradient(circle at 50% 0%, ${color} 38%, #ffffff 36%)`;
   cardElement.querySelectorAll(".types span").forEach((typeColor) => {
       typeColor.style.color = "#ffffff";
   });

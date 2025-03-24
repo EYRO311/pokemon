@@ -23,7 +23,7 @@ body {
     grid-template-columns: repeat(3, 1fr); /* 3 columnas */
     gap: 20px;
     justify-content: center; /* Centrar horizontalmente */
-    margin-top: 230px;
+    margin-top: 460px;
     width: 100%;
     padding: 10px;
     border-radius: 15px;
@@ -296,6 +296,20 @@ input:checked + .slider:before {
     border: 2px solid #4CAF50;
     border-radius: 8px;
     padding: 5px;
+}
+
+button {
+    display: block;
+    padding: 3% 10%;
+    font-size: 80%;
+    background-color: #101010;
+    color: #ffffff;
+    position: relative;
+    margin: 5% auto;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 /* Botón de búsqueda */
