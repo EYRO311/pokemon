@@ -190,10 +190,10 @@ body {
 /* Botones de regiones */
 .region-buttons {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;    /* Evita que los botones se vayan a otra línea */
+    gap: 10px;
     justify-content: center;
-    gap: 5px;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .region-buttons button {
@@ -354,4 +354,52 @@ button {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     z-index: 10; /* Asegura que esté siempre por encima */
+}
+
+#selected-team {
+    display: flex;
+    flex-wrap: nowrap;  /* Mantiene todas las cartas en una sola fila */
+    gap: 10px;          /* Espacio más reducido entre cartas */
+    justify-content: center;  /* Centra las cartas horizontalmente */
+    margin-top: 20px;
+    width: 100%;        /* Asegura que el contenedor ocupe todo el ancho */
+    transform: scale(0.9);  /* Reduce el tamaño general para optimizar espacio */
+}
+
+/* Cartas del equipo seleccionado */
+.selected-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 140px;      /* Tamaño ajustado para mantener el diseño limpio */
+    min-width: 140px;  /* Ancho mínimo para evitar que se deformen */
+}
+
+.pokemon-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.pokemon-image {
+    width: 60px;
+    height: 60px;
+    image-rendering: pixelated;
+}
+
+.btn-eliminar {
+    background-color: #e63946;
+    color: #ffffff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #c82333;
 }

@@ -18,7 +18,7 @@ const typeColor = {
     dark: "#503581",
     steel: "#808080"
 };
- 
+
 // Input del nombre del usuario y botón para guardar
 const usernameInput = document.getElementById("usernameInput"); 
 
@@ -43,34 +43,37 @@ class Pokemon {
 
 // Función para guardar un Pokémon en el equipo
 function savePokemonToTeam(data) {
-  const randomMoves = data.moves
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 4)
-      .map(move => move.move.name);
+    const randomMoves = data.moves
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4)
+        .map(move => move.move.name);
 
-  const shiny = Math.random() < 0.5 ? true : false;
+    const shiny = Math.random() < 0.5 ? true : false;
 
-  const pokemon = new Pokemon(
-      crypto.randomUUID(),         // ID único
-      data.name,
-      data.id,                     // Número de Pokédex
-      data.stats[1].base_stat,     // Ataque
-      data.stats[2].base_stat,     // Defensa
-      data.stats[3].base_stat,     // Ataque Especial
-      data.stats[4].base_stat,     // Defensa Especial
-      randomMoves,
-      data.types.map(type => type.type.name), // Tipos
-      shiny
-  );
+    const pokemon = new Pokemon(
+        crypto.randomUUID(),         // ID único
+        data.name,
+        data.id,                     // Número de Pokédex
+        data.stats[1].base_stat,     // Ataque
+        data.stats[2].base_stat,     // Defensa
+        data.stats[3].base_stat,     // Ataque Especial
+        data.stats[4].base_stat,     // Defensa Especial
+        randomMoves,
+        data.types.map(type => type.type.name), // Tipos
+        shiny
+    );
 
-  pokemonTeam.push(pokemon);
+    pokemonTeam.push(pokemon);
 
-  console.log(`Pokémon agregado al equipo: ${pokemon.name}`);
+    // Mostrar el equipo en pantalla
+    displaySelectedTeam();
 
-  // Guardar el equipo automáticamente cuando tenga 6 Pokémon
-  if (pokemonTeam.length === 6) {
-      autoSaveTeam();
-  }
+    console.log(`Pokémon agregado al equipo: ${pokemon.name}`);
+
+    // Guardar el equipo automáticamente cuando tenga 6 Pokémon
+    if (pokemonTeam.length === 6) {
+        autoSaveTeam();
+    }
 }
 
 // Guardar el equipo automáticamente cuando se seleccionen 6 Pokémon
@@ -198,6 +201,43 @@ searchButton.addEventListener("click", () => {
   }
 });
 
+// Contenedor del equipo seleccionado
+const selectedTeamContainer = document.getElementById("selected-team");
+
+// Función para mostrar el equipo seleccionado
+function displaySelectedTeam() {
+    selectedTeamContainer.innerHTML = ""; // Limpiar el contenedor antes de actualizar
+
+    pokemonTeam.forEach(pokemon => {
+        const card = document.createElement("div");
+        card.classList.add("selected-card");
+        card.style.backgroundColor = typeColor[pokemon.types[0]] || "#808080";
+
+        card.innerHTML = `
+            <div class="pokemon-header">
+                <img src="${pokemon.shiny ? 
+                    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemon.pokedexNumber}.png` : 
+                    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedexNumber}.png`}" 
+                    alt="${pokemon.name}" class="pokemon-image"/>
+                <h3>${pokemon.name}</h3>
+                <button class="btn-eliminar" data-id="${pokemon.id}">Eliminar</button>
+            </div>
+        `;
+
+        selectedTeamContainer.appendChild(card);
+
+        // Eliminar Pokémon del equipo
+        const btnEliminar = card.querySelector(".btn-eliminar");
+        btnEliminar.addEventListener("click", () => eliminarPokemon(pokemon.id));
+    });
+}
+
+// Función para eliminar un Pokémon del equipo
+function eliminarPokemon(id) {
+    pokemonTeam = pokemonTeam.filter(pokemon => pokemon.id !== id);
+    displaySelectedTeam(); // Actualizar la vista
+}
+
 // Generar Pokémon aleatorio
 let getPokeData = () => {
     let id = Math.floor(Math.random() * 1010) + 1;
@@ -214,16 +254,16 @@ let getPokeData = () => {
 let generateRandomPokemon = () => {
   card.innerHTML = ""; // Limpiar el contenedor antes de generar nuevos Pokémon
 
-  for (let i = 0; i < 6; i++) {
-      let id = Math.floor(Math.random() * 1010) + 1; // Pokémon aleatorio de toda la base de datos
-      const finalUrl = url + id;
+for (let i = 0; i < 6; i++) {
+        let id = Math.floor(Math.random() * 1010) + 1; // Pokémon aleatorio de toda la base de datos
+        const finalUrl = url + id;
 
-      fetch(finalUrl)
-          .then((response) => response.json())
-          .then((data) => {
-              generateCard(data);
-          });
-  }
+        fetch(finalUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            generateCard(data);
+        });
+    }
 };
 
 // Generar 6 Pokémon por región (3 arriba y 3 abajo)
