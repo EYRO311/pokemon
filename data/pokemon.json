@@ -1,0 +1,122 @@
+{
+  "username": "eyro",
+  "team": [
+    {
+      "id": "2aafeaa1-aced-48a3-b48f-7519a9a93637",
+      "name": "muk",
+      "pokedexNumber": 89,
+      "attack": 105,
+      "defense": 75,
+      "specialAttack": 65,
+      "specialDefense": 100,
+      "moves": [
+        "torment",
+        "shock-wave",
+        "memento",
+        "taunt"
+      ],
+      "types": [
+        "poison"
+      ],
+      "shiny": true
+    },
+    {
+      "id": "02604196-f717-4b77-9aa6-3e579698966a",
+      "name": "nidorina",
+      "pokedexNumber": 30,
+      "attack": 62,
+      "defense": 67,
+      "specialAttack": 55,
+      "specialDefense": 55,
+      "moves": [
+        "thunderbolt",
+        "skull-bash",
+        "return",
+        "focus-energy"
+      ],
+      "types": [
+        "poison"
+      ],
+      "shiny": false
+    },
+    {
+      "id": "c6f138e6-11b6-4444-be10-e6d2e6106b15",
+      "name": "vespiquen",
+      "pokedexNumber": 416,
+      "attack": 80,
+      "defense": 102,
+      "specialAttack": 80,
+      "specialDefense": 102,
+      "moves": [
+        "confuse-ray",
+        "x-scissor",
+        "pin-missile",
+        "spite"
+      ],
+      "types": [
+        "bug",
+        "flying"
+      ],
+      "shiny": false
+    },
+    {
+      "id": "a67d34f1-dc54-4d1c-96d1-41cf3fd589ca",
+      "name": "muk",
+      "pokedexNumber": 89,
+      "attack": 105,
+      "defense": 75,
+      "specialAttack": 65,
+      "specialDefense": 100,
+      "moves": [
+        "mud-slap",
+        "drain-punch",
+        "helping-hand",
+        "round"
+      ],
+      "types": [
+        "poison"
+      ],
+      "shiny": false
+    },
+    {
+      "id": "0ca3c155-dd2d-4ada-8e9f-f17218628a0f",
+      "name": "dodrio",
+      "pokedexNumber": 85,
+      "attack": 110,
+      "defense": 70,
+      "specialAttack": 60,
+      "specialDefense": 60,
+      "moves": [
+        "stomping-tantrum",
+        "supersonic",
+        "wing-attack",
+        "mud-slap"
+      ],
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "shiny": false
+    },
+    {
+      "id": "c529e394-d364-4ffa-8798-1802bae72c2f",
+      "name": "salamence",
+      "pokedexNumber": 373,
+      "attack": 135,
+      "defense": 80,
+      "specialAttack": 110,
+      "specialDefense": 80,
+      "moves": [
+        "ember",
+        "snore",
+        "captivate",
+        "air-cutter"
+      ],
+      "types": [
+        "dragon",
+        "flying"
+      ],
+      "shiny": true
+    }
+  ]
+}

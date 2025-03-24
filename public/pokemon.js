@@ -1,23 +1,134 @@
 const typeColor = {
     bug: "#86c263",
-    dragon: "#203178",
+    dragon: "#2895a0",
     electric: "#f3db13",
-    fairy: "#ff00d8",
+    fairy: "#ba3562",
     fighting: "#ac0505",
-    fire: "#ff7400",
-    flying: "#d3d3d3",
-    grass: "#13b62e",
-    ground: "#daaa22",
+    fire: "#e91b1b",
+    flying: "#7e7e7e",
+    grass: "#429a21",
+    ground: "#967830",
     ghost: "#9551e9",
-    ice: "#1ee5f5",
+    ice: "#98edef",
     normal: "#cea9cf",
     poison: "#99039e",
     psychic: "#ff00b1",
-    rock: "#967830",
-    water: "#2777ff ",
-    dark: "#0a1f44",
+    rock: "#978b65",
+    water: "#356cba ",
+    dark: "#503581",
     steel: "#808080"
 };
+ 
+// Input del nombre del usuario y botón para guardar
+const usernameInput = document.getElementById("usernameInput"); 
+
+// Array para almacenar el equipo de Pokémon
+let pokemonTeam = [];
+
+// Constructor para Pokémon
+class Pokemon {
+  constructor(id, name, pokedexNumber, attack, defense, specialAttack, specialDefense, moves, types, shiny) {
+      this.id = id;
+      this.name = name;
+      this.pokedexNumber = pokedexNumber;
+      this.attack = attack;
+      this.defense = defense;
+      this.specialAttack = specialAttack;
+      this.specialDefense = specialDefense;
+      this.moves = moves;
+      this.types = types;
+      this.shiny = shiny;
+  } 
+}
+
+// Función para guardar un Pokémon en el equipo
+function savePokemonToTeam(data) {
+  const randomMoves = data.moves
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 4)
+      .map(move => move.move.name);
+
+  const shiny = Math.random() < 0.5 ? true : false;
+
+  const pokemon = new Pokemon(
+      crypto.randomUUID(),         // ID único
+      data.name,
+      data.id,                     // Número de Pokédex
+      data.stats[1].base_stat,     // Ataque
+      data.stats[2].base_stat,     // Defensa
+      data.stats[3].base_stat,     // Ataque Especial
+      data.stats[4].base_stat,     // Defensa Especial
+      randomMoves,
+      data.types.map(type => type.type.name), // Tipos
+      shiny
+  );
+
+  pokemonTeam.push(pokemon);
+
+  console.log(`Pokémon agregado al equipo: ${pokemon.name}`);
+
+  // Guardar el equipo automáticamente cuando tenga 6 Pokémon
+  if (pokemonTeam.length === 6) {
+      autoSaveTeam();
+  }
+}
+
+// Guardar el equipo automáticamente cuando se seleccionen 6 Pokémon
+function autoSaveTeam() {
+  const username = usernameInput.value.trim();
+
+  if (!username) {
+      alert("Por favor, ingresa tu nombre antes de seleccionar Pokémon.");
+      pokemonTeam = []; // Limpiar el equipo si no hay nombre
+      return;
+  }
+
+  const teamData = {
+      username: username,
+      team: pokemonTeam
+  };
+
+  fetch('/saveTeam', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(teamData)
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log("Equipo guardado automáticamente:", data);
+      console.log(`Equipo completo: ${pokemonTeam.map(pokemon => pokemon.name).join(', ')}`);
+      alert(`¡Equipo guardado exitosamente como "${username}"!`);
+
+      // Limpiar el equipo después de guardarlo
+      pokemonTeam = [];
+  })
+  .catch(error => console.error("Error al guardar el equipo:", error));
+}
+
+// Guardar Pokémon desde el botón "Seleccionar"
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("btn-seleccionar")) {
+      const username = usernameInput.value.trim();
+
+      if (!username) {
+          alert("Por favor, ingresa tu nombre antes de seleccionar un Pokémon.");
+          return;
+      }
+
+      const pokemonCard = event.target.closest(".pokemon-card");
+      const pokemonName = pokemonCard.querySelector(".poke-name").innerText;
+
+      // Buscar el Pokémon en la API para obtener todos sus datos
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`)
+          .then((response) => response.json())
+          .then((data) => {
+              savePokemonToTeam(data);
+          })
+          .catch((error) => console.error("Error al guardar el Pokémon:", error));
+  }
+});
 
 const url = "https://pokeapi.co/api/v2/pokemon/";
 const card = document.getElementById("card");
