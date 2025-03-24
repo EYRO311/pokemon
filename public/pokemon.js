@@ -68,24 +68,23 @@ async function loadPokemonList() {
 }
 loadPokemonList();
 
-// Buscar Pokémon por nombre
+// Función para limpiar las cartas y mostrar solo 1 Pokémon cuando se usa el buscador manual
 searchButton.addEventListener("click", () => {
-    const pokemonName = searchInput.value.trim().toLowerCase();
-    if (pokemonName) {
-        fetch(url + pokemonName)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Pokémon no encontrado");
-            }
-            return response.json();
-        })
-        .then((data) => {
-            generateCard(data);
-        })
-        .catch(() => {
-            card.innerHTML = `<p style="color: red;">Pokémon no encontrado</p>`;
-        });
-    }
+  const pokemonName = searchInput.value.trim().toLowerCase();
+  if (pokemonName) {
+      card.innerHTML = ""; // LIMPIA EL CONTENEDOR ANTES DE MOSTRAR EL POKÉMON BUSCADO
+      fetch(url + pokemonName)
+          .then((response) => {
+              if (!response.ok) throw new Error("Pokémon no encontrado");
+              return response.json();
+          })
+          .then((data) => {
+              generateCard(data); // Muestra solo 1 Pokémon
+          })
+          .catch(() => {
+              card.innerHTML = `<p style="color: red;">Pokémon no encontrado</p>`;
+          });
+  }
 });
 
 // Generar Pokémon aleatorio
@@ -100,92 +99,150 @@ let getPokeData = () => {
         });
 };
 
-// Generar Pokémon por región
-let generatePokemonByRange = (min, max) => {
-    let id = Math.floor(Math.random() * (max - min + 1)) + min;
-    const finalUrl = url + id;
+// Generar 6 Pokémon aleatorios
+let generateRandomPokemon = () => {
+  card.innerHTML = ""; // Limpiar el contenedor antes de generar nuevos Pokémon
 
-    fetch(finalUrl)
-        .then((response) => response.json())
-        .then((data) => {
-            generateCard(data);
-        });
+  for (let i = 0; i < 6; i++) {
+      let id = Math.floor(Math.random() * 1010) + 1; // Pokémon aleatorio de toda la base de datos
+      const finalUrl = url + id;
+
+      fetch(finalUrl)
+          .then((response) => response.json())
+          .then((data) => {
+              generateCard(data);
+          });
+  }
 };
 
-// Generar carta de Pokémon
+// Generar 6 Pokémon por región (3 arriba y 3 abajo)
+let generateMultiplePokemonByRange = (min, max) => {
+  card.innerHTML = ""; // Limpiar el contenedor antes de generar nuevos Pokémon
+
+  for (let i = 0; i < 6; i++) {
+      let id = Math.floor(Math.random() * (max - min + 1)) + min;
+      const finalUrl = url + id;
+
+      fetch(finalUrl)
+          .then((response) => response.json())
+          .then((data) => {
+              generateCard(data);
+          });
+  }
+};
+
+// Generar una carta de Pokémon
 let generateCard = (data) => {
-    const hp = data.stats[0].base_stat;
-    const attack = data.stats[1].base_stat;
-    const defense = data.stats[2].base_stat;
-    const specialAttack = data.stats[3].base_stat;
-    const specialDefense = data.stats[4].base_stat;
-    const speed = data.stats[5].base_stat;
+  const hp = data.stats[0].base_stat;
+  const attack = data.stats[1].base_stat;
+  const defense = data.stats[2].base_stat;
+  const specialAttack = data.stats[3].base_stat;
+  const specialDefense = data.stats[4].base_stat;
+  const speed = data.stats[5].base_stat;
 
-    const imgSrc = data.sprites.front_default;     // Imagen normal
-    const imgShinySrc = data.sprites.front_shiny;  // Imagen shiny
+  const imgSrc = data.sprites.front_default;
+  const imgShinySrc = data.sprites.front_shiny;
 
-    const pokeName = data.name[0].toUpperCase() + data.name.slice(1);
-    const pokeId = data.id;
+  const pokeName = data.name[0].toUpperCase() + data.name.slice(1);
+  const pokeId = data.id;
 
-    const randomAbility = data.abilities[Math.floor(Math.random() * data.abilities.length)].ability.name;
+  const randomAbility = data.abilities[Math.floor(Math.random() * data.abilities.length)].ability.name;
 
-    const themeColor = typeColor[data.types[0].type.name];
+  const themeColor = typeColor[data.types[0].type.name];
 
-    card.innerHTML = `
-        <p class="pokedex-id">#${pokeId}</p>
-        <p class="hp">
-            <span>HP</span>
-            ${hp}
-        </p>
+  const cardElement = document.createElement("div");
+  cardElement.classList.add("pokemon-card");
 
-        <div class="image-container">
-            <div class="image-box">
-                <img src=${imgSrc} alt="${pokeName} Normal" />
-                <p class="image-label">Normal</p>
-            </div>
-            <div class="image-box">
-                <img src=${imgShinySrc} alt="${pokeName} Shiny" />
-                <p class="image-label">Shiny</p>
-            </div>
-        </div>
+  cardElement.innerHTML = `
+      <div class="pokedex-hp">
+          <span class="pokedex-id">#${pokeId}</span>
+          <span class="hp">HP ${hp}</span>
+      </div>
 
-        <h2 class="poke-name">${pokeName}</h2>
-        <div class="types"></div>
-    `;
+      <div class="image-container">
+          <div class="image-box">
+              <img src=${imgSrc} alt="${pokeName} Normal" />
+          </div>
+          <div class="image-box">
+              <img src=${imgShinySrc} alt="${pokeName} Shiny" />
+          </div>
+      </div>
 
-    appendTypes(data.types);
-    styleCard(themeColor);
+      <h2 class="poke-name">${pokeName}</h2>
+      <div class="types"></div>
+
+      <div class="stats">
+          <div class="main-stats">
+              <div>
+                  <h3>${attack}</h3>
+                  <p>Ataque</p>
+              </div>
+              <div>
+                  <h3>${specialAttack}</h3>
+                  <p>Ataque Especial</p>
+              </div>
+              <div>
+                  <h3>${defense}</h3>
+                  <p>Defensa</p>
+              </div>
+              <div>
+                  <h3>${specialDefense}</h3>
+                  <p>Defensa Especial</p>
+              </div>
+          </div>
+              <br>
+          <div class="extra-stats">
+              <div>
+                  <h3>${speed}</h3>
+                  <p>Velocidad</p>
+              </div>
+              <div>
+                  <h3>${randomAbility}</h3>
+                  <p>Habilidad</p>
+              </div>
+          </div>
+      </div>
+  `;
+
+  appendTypes(data.types, cardElement);
+  styleCard(themeColor, cardElement);
+
+  card.appendChild(cardElement);
 };
 
-let appendTypes = (types) => {
-    const typesContainer = document.querySelector(".types");
-    typesContainer.innerHTML = ""; // Limpiar para evitar duplicados
+// Estilo para mostrar los tipos de Pokémon
+let appendTypes = (types, cardElement) => {
+  const typesContainer = cardElement.querySelector(".types");
+  typesContainer.innerHTML = "";
 
-    types.forEach((item) => {
-        let span = document.createElement("SPAN");
-        span.textContent = item.type.name.toUpperCase();
-        span.style.backgroundColor = typeColor[item.type.name];
-        span.classList.add("poke-type");
-        typesContainer.appendChild(span);
-    });
+  types.forEach((item) => {
+      let span = document.createElement("SPAN");
+      span.textContent = item.type.name.toUpperCase();
+      span.style.backgroundColor = typeColor[item.type.name];
+      span.classList.add("poke-type");
+      typesContainer.appendChild(span);
+  });
 };
 
-let styleCard = (color) => {
-    card.style.background = `radial-gradient(circle at 50% 0%, ${color} 42%, #ffffff 36%)`;
-    card.querySelectorAll(".types span").forEach((typeColor) => {
-        typeColor.style.color = "#ffffff";
-    });
+// Estilo de la carta
+let styleCard = (color, cardElement) => {
+  cardElement.style.background = `radial-gradient(circle at 50% 0%, ${color} 36%, #ffffff 36%)`;
+  cardElement.querySelectorAll(".types span").forEach((typeColor) => {
+      typeColor.style.color = "#ffffff";
+  });
 };
 
-btn.addEventListener("click", getPokeData);
-btnk.addEventListener("click", () => generatePokemonByRange(1, 151));  
-btnj.addEventListener("click", () => generatePokemonByRange(152, 251)); 
-btnh.addEventListener("click", () => generatePokemonByRange(252, 386)); 
-btns.addEventListener("click", () => generatePokemonByRange(387, 493)); 
-btnu.addEventListener("click", () => generatePokemonByRange(494, 649));
-btnka.addEventListener("click", () => generatePokemonByRange(650, 721));
-btna.addEventListener("click", () => generatePokemonByRange(722, 809));
-btng.addEventListener("click", () => generatePokemonByRange(810, 898));
-btnp.addEventListener("click", () => generatePokemonByRange(899, 1010));
+// Asignar el comportamiento al botón "Generar Aleatorio"
+btn.addEventListener("click", generateRandomPokemon);
+// Asignar el nuevo comportamiento a los botones de región
+btnk.addEventListener("click", () => generateMultiplePokemonByRange(1, 151));  
+btnj.addEventListener("click", () => generateMultiplePokemonByRange(152, 251)); 
+btnh.addEventListener("click", () => generateMultiplePokemonByRange(252, 386)); 
+btns.addEventListener("click", () => generateMultiplePokemonByRange(387, 493)); 
+btnu.addEventListener("click", () => generateMultiplePokemonByRange(494, 649));
+btnka.addEventListener("click", () => generateMultiplePokemonByRange(650, 721));
+btna.addEventListener("click", () => generateMultiplePokemonByRange(722, 809));
+btng.addEventListener("click", () => generateMultiplePokemonByRange(810, 898));
+btnp.addEventListener("click", () => generateMultiplePokemonByRange(899, 1010));
 
 window.addEventListener("load", getPokeData);
