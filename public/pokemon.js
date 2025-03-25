@@ -19,6 +19,16 @@ const typeColor = {
     steel: "#808080"
 };
 
+const socket = io();
+
+// Enviar evento cuando un usuario ingresa
+document.getElementById('usernameInput').addEventListener('input', () => {
+    const username = document.getElementById('usernameInput').value;
+    if (username.trim() !== '') {
+        socket.emit('usuarioIngresado', username);
+    }
+});
+
 // Input del nombre del usuario y botón para guardar
 const usernameInput = document.getElementById("usernameInput"); 
 
@@ -76,6 +86,34 @@ function savePokemonToTeam(data) {
         displayReadyButton();
     }
 }
+
+// Enviar evento cuando se guarde el equipo
+function guardarEquipo(username, pokemonTeam) {
+    fetch('/saveTeam', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, team: pokemonTeam })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Error al guardar el equipo.");
+        }
+        socket.emit('equipoGuardado', { username });  // Notificar al servidor
+        console.log(`Equipo guardado exitosamente para ${username}`);
+    })
+    .catch(error => console.error('Error al guardar el equipo:', error));
+}
+
+// Notificación visual de los eventos en tiempo real
+socket.on('nuevoIngreso', (username) => {
+    console.log(`¡Nuevo usuario conectado: ${username}!`);
+});
+
+socket.on('equipoGuardadoExito', (username) => {
+    console.log(`El equipo de ${username} se guardó exitosamente.`);
+});
 
 // Nueva función para mostrar el botón "Ready"
 function displayReadyButton() {

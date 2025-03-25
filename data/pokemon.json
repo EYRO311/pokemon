@@ -245,5 +245,128 @@
         "shiny": false
       }
     ]
+  },
+  {
+    "username": "wyeri",
+    "team": [
+      {
+        "id": "71256810-6b72-4220-9962-5f7bbfa3ca58",
+        "name": "wo-chien",
+        "pokedexNumber": 1001,
+        "attack": 85,
+        "defense": 100,
+        "specialAttack": 95,
+        "specialDefense": 135,
+        "moves": [
+          "sunny-day",
+          "mud-shot",
+          "power-whip",
+          "protect"
+        ],
+        "types": [
+          "dark",
+          "grass"
+        ],
+        "shiny": true
+      },
+      {
+        "id": "3c0de765-cd88-4971-8f27-9dc026f5fb20",
+        "name": "mew",
+        "pokedexNumber": 151,
+        "attack": 100,
+        "defense": 100,
+        "specialAttack": 100,
+        "specialDefense": 100,
+        "moves": [
+          "energy-ball",
+          "swords-dance",
+          "hydro-cannon",
+          "me-first"
+        ],
+        "types": [
+          "psychic"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "41cb5107-40a3-4888-ab73-21b9af784a68",
+        "name": "dewgong",
+        "pokedexNumber": 87,
+        "attack": 70,
+        "defense": 80,
+        "specialAttack": 70,
+        "specialDefense": 95,
+        "moves": [
+          "captivate",
+          "rain-dance",
+          "rest",
+          "swagger"
+        ],
+        "types": [
+          "water",
+          "ice"
+        ],
+        "shiny": true
+      },
+      {
+        "id": "d68e0e46-7a2b-43f5-9947-5e29ef1c9b15",
+        "name": "dwebble",
+        "pokedexNumber": 557,
+        "attack": 65,
+        "defense": 85,
+        "specialAttack": 35,
+        "specialDefense": 35,
+        "moves": [
+          "hone-claws",
+          "frustration",
+          "shadow-claw",
+          "substitute"
+        ],
+        "types": [
+          "bug",
+          "rock"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "2a183877-dfe8-4592-96cf-2bfcd1480411",
+        "name": "scovillain",
+        "pokedexNumber": 952,
+        "attack": 108,
+        "defense": 65,
+        "specialAttack": 108,
+        "specialDefense": 65,
+        "moves": [
+          "endure",
+          "giga-impact",
+          "scary-face",
+          "protect"
+        ],
+        "types": [
+          "grass",
+          "fire"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "6552f379-bad8-4c9f-8ce8-b9633cdc7d42",
+        "name": "wailord",
+        "pokedexNumber": 321,
+        "attack": 90,
+        "defense": 45,
+        "specialAttack": 90,
+        "specialDefense": 45,
+        "moves": [
+          "confide",
+          "rain-dance",
+          "secret-power",
+          "mist"
+        ],
+        "types": [
+          "water"
+        ],
+        "shiny": false
+      }
+    ]
   }
 ]
