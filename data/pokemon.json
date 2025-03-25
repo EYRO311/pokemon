@@ -1,124 +1,249 @@
-{
-  "username": "wfw",
-  "team": [
-    {
-      "id": "1b8ed6db-17f6-4b13-9231-1b4472cedae2",
-      "name": "chien-pao",
-      "pokedexNumber": 1002,
-      "attack": 120,
-      "defense": 80,
-      "specialAttack": 90,
-      "specialDefense": 65,
-      "moves": [
-        "night-slash",
-        "ice-fang",
-        "throat-chop",
-        "protect"
-      ],
-      "types": [
-        "dark",
-        "ice"
-      ],
-      "shiny": false
-    },
-    {
-      "id": "b4952ecd-3088-41b1-9ada-af914a174ad8",
-      "name": "zamazenta",
-      "pokedexNumber": 889,
-      "attack": 120,
-      "defense": 115,
-      "specialAttack": 80,
-      "specialDefense": 115,
-      "moves": [
-        "wild-charge",
-        "rain-dance",
-        "payback",
-        "protect"
-      ],
-      "types": [
-        "fighting"
-      ],
-      "shiny": true
-    },
-    {
-      "id": "5b475c02-0d1a-40e1-a2e0-ad4a441becf9",
-      "name": "cyclizar",
-      "pokedexNumber": 967,
-      "attack": 95,
-      "defense": 65,
-      "specialAttack": 85,
-      "specialDefense": 65,
-      "moves": [
-        "uproar",
-        "quick-attack",
-        "giga-impact",
-        "mud-shot"
-      ],
-      "types": [
-        "dragon",
-        "normal"
-      ],
-      "shiny": true
-    },
-    {
-      "id": "dcc3d251-b52f-442a-b561-94ba2d88bd59",
-      "name": "dewgong",
-      "pokedexNumber": 87,
-      "attack": 70,
-      "defense": 80,
-      "specialAttack": 70,
-      "specialDefense": 95,
-      "moves": [
-        "swallow",
-        "knock-off",
-        "icicle-spear",
-        "muddy-water"
-      ],
-      "types": [
-        "water",
-        "ice"
-      ],
-      "shiny": false
-    },
-    {
-      "id": "38090f80-f2a1-4ed7-8976-d7e159221d9b",
-      "name": "dialga",
-      "pokedexNumber": 483,
-      "attack": 120,
-      "defense": 120,
-      "specialAttack": 150,
-      "specialDefense": 100,
-      "moves": [
-        "swift",
-        "focus-blast",
-        "double-team",
-        "iron-tail"
-      ],
-      "types": [
-        "steel",
-        "dragon"
-      ],
-      "shiny": false
-    },
-    {
-      "id": "3aba2cc8-5309-4a4f-b1a2-767f4add872b",
-      "name": "roserade",
-      "pokedexNumber": 407,
-      "attack": 70,
-      "defense": 65,
-      "specialAttack": 125,
-      "specialDefense": 105,
-      "moves": [
-        "growth",
-        "covet",
-        "sunny-day",
-        "absorb"
-      ],
-      "types": [
-        "grass",
-        "poison"
-      ],
-      "shiny": false
-    }
-  ]
-}
+[
+  {
+    "username": "nok",
+    "team": [
+      {
+        "id": "b0a6fd4f-1dce-4fc0-9915-e09b28623b24",
+        "name": "gible",
+        "pokedexNumber": 443,
+        "attack": 70,
+        "defense": 45,
+        "specialAttack": 40,
+        "specialDefense": 45,
+        "moves": [
+          "fire-fang",
+          "stealth-rock",
+          "facade",
+          "dragon-claw"
+        ],
+        "types": [
+          "dragon",
+          "ground"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "edb83927-22cf-4703-bda5-fde4344ad79a",
+        "name": "gible",
+        "pokedexNumber": 443,
+        "attack": 70,
+        "defense": 45,
+        "specialAttack": 40,
+        "specialDefense": 45,
+        "moves": [
+          "scary-face",
+          "rock-smash",
+          "draco-meteor",
+          "bulldoze"
+        ],
+        "types": [
+          "dragon",
+          "ground"
+        ],
+        "shiny": true
+      },
+      {
+        "id": "1e5fb5c2-e8ea-47a7-8416-e0d90867153c",
+        "name": "gible",
+        "pokedexNumber": 443,
+        "attack": 70,
+        "defense": 45,
+        "specialAttack": 40,
+        "specialDefense": 45,
+        "moves": [
+          "stealth-rock",
+          "strength",
+          "sleep-talk",
+          "dig"
+        ],
+        "types": [
+          "dragon",
+          "ground"
+        ],
+        "shiny": true
+      },
+      {
+        "id": "43b63fd8-784f-46f4-94fb-d4429b69c713",
+        "name": "gible",
+        "pokedexNumber": 443,
+        "attack": 70,
+        "defense": 45,
+        "specialAttack": 40,
+        "specialDefense": 45,
+        "moves": [
+          "flamethrower",
+          "outrage",
+          "sunny-day",
+          "cut"
+        ],
+        "types": [
+          "dragon",
+          "ground"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "c7a5e6f4-55c7-4fb8-80b6-cd5a6b88dee6",
+        "name": "gible",
+        "pokedexNumber": 443,
+        "attack": 70,
+        "defense": 45,
+        "specialAttack": 40,
+        "specialDefense": 45,
+        "moves": [
+          "facade",
+          "dragon-rage",
+          "slash",
+          "thrash"
+        ],
+        "types": [
+          "dragon",
+          "ground"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "d6a044c6-cff7-44e0-9809-b3125a78e6bd",
+        "name": "gible",
+        "pokedexNumber": 443,
+        "attack": 70,
+        "defense": 45,
+        "specialAttack": 40,
+        "specialDefense": 45,
+        "moves": [
+          "dragon-cheer",
+          "iron-tail",
+          "dragon-tail",
+          "round"
+        ],
+        "types": [
+          "dragon",
+          "ground"
+        ],
+        "shiny": false
+      }
+    ]
+  },
+  {
+    "username": "kirito",
+    "team": [
+      {
+        "id": "f409b91b-2ffd-48b0-a1c9-78c263ec69e5",
+        "name": "fraxure",
+        "pokedexNumber": 611,
+        "attack": 117,
+        "defense": 70,
+        "specialAttack": 40,
+        "specialDefense": 50,
+        "moves": [
+          "brick-break",
+          "focus-energy",
+          "cut",
+          "hidden-power"
+        ],
+        "types": [
+          "dragon"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "a030162e-271d-495d-a0f3-5d777333b40f",
+        "name": "krookodile",
+        "pokedexNumber": 553,
+        "attack": 117,
+        "defense": 80,
+        "specialAttack": 65,
+        "specialDefense": 70,
+        "moves": [
+          "retaliate",
+          "endure",
+          "confide",
+          "thrash"
+        ],
+        "types": [
+          "ground",
+          "dark"
+        ],
+        "shiny": true
+      },
+      {
+        "id": "376369c2-19ab-4c63-a24f-b50df9f5c9af",
+        "name": "sawsbuck",
+        "pokedexNumber": 586,
+        "attack": 100,
+        "defense": 70,
+        "specialAttack": 60,
+        "specialDefense": 70,
+        "moves": [
+          "jump-kick",
+          "tera-blast",
+          "take-down",
+          "play-rough"
+        ],
+        "types": [
+          "normal",
+          "grass"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "66051a6c-8118-4bca-b5f4-5c7fd2ea5a28",
+        "name": "lilligant",
+        "pokedexNumber": 549,
+        "attack": 60,
+        "defense": 75,
+        "specialAttack": 110,
+        "specialDefense": 75,
+        "moves": [
+          "attract",
+          "swagger",
+          "encore",
+          "energy-ball"
+        ],
+        "types": [
+          "grass"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "7ead4328-a0ee-4c0f-a409-fc9faf4782ef",
+        "name": "landorus-incarnate",
+        "pokedexNumber": 645,
+        "attack": 125,
+        "defense": 90,
+        "specialAttack": 115,
+        "specialDefense": 80,
+        "moves": [
+          "self-destruct",
+          "giga-impact",
+          "sleep-talk",
+          "facade"
+        ],
+        "types": [
+          "ground",
+          "flying"
+        ],
+        "shiny": false
+      },
+      {
+        "id": "319dcd6f-9892-46c5-bb38-27e2eeb2e655",
+        "name": "panpour",
+        "pokedexNumber": 515,
+        "attack": 53,
+        "defense": 48,
+        "specialAttack": 53,
+        "specialDefense": 48,
+        "moves": [
+          "secret-power",
+          "attract",
+          "water-pulse",
+          "low-kick"
+        ],
+        "types": [
+          "water"
+        ],
+        "shiny": false
+      }
+    ]
+  }
+]

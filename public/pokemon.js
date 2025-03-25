@@ -41,8 +41,13 @@ class Pokemon {
   } 
 }
 
-// Función para guardar un Pokémon en el equipo
 function savePokemonToTeam(data) {
+    // Verificar si ya hay 6 Pokémon en el equipo
+    if (pokemonTeam.length >= 6) {
+        alert("¡No puedes tener más de 6 Pokémon en tu equipo!");
+        return; // No permite agregar más de 6 Pokémon
+    }
+
     const randomMoves = data.moves
         .sort(() => 0.5 - Math.random())
         .slice(0, 4)
@@ -64,50 +69,66 @@ function savePokemonToTeam(data) {
     );
 
     pokemonTeam.push(pokemon);
-
-    // Mostrar el equipo en pantalla
     displaySelectedTeam();
 
-    console.log(`Pokémon agregado al equipo: ${pokemon.name}`);
-
-    // Guardar el equipo automáticamente cuando tenga 6 Pokémon
+    // Mostrar el botón Ready cuando se tengan 6 Pokémon
     if (pokemonTeam.length === 6) {
-        autoSaveTeam();
+        displayReadyButton();
     }
 }
 
-// Guardar el equipo automáticamente cuando se seleccionen 6 Pokémon
-function autoSaveTeam() {
-  const username = usernameInput.value.trim();
+// Nueva función para mostrar el botón "Ready"
+function displayReadyButton() {
+    // Verifica si el botón ya existe para no duplicarlo
+    if (!document.getElementById("ready-button")) {
+        const readyButton = document.createElement("button");
+        readyButton.id = "ready-button";
+        readyButton.textContent = "Ready";
+        readyButton.classList.add("btn-ready");
 
-  if (!username) {
-      alert("Por favor, ingresa tu nombre antes de seleccionar Pokémon.");
-      pokemonTeam = []; // Limpiar el equipo si no hay nombre
-      return;
-  }
+        readyButton.addEventListener("click", () => {
+            const username = usernameInput.value.trim();  // Nombre de usuario
+        
+            if (!username) {
+                alert("Por favor, ingresa tu nombre antes de guardar el equipo.");
+                return;
+            }
+        
+            // Datos del equipo
+            const teamData = {
+                username: username,
+                team: pokemonTeam  // Aquí se pasan los datos del equipo
+            };
+        
+            // Enviar datos al servidor
+            fetch('/saveTeam', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, team: pokemonTeam })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en el servidor");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Equipo guardado con éxito:", data);
+                alert(`¡Equipo guardado exitosamente como "${username}"!`);
+        
+                // Limpiar el equipo y ocultar el botón Ready
+                pokemonTeam = [];
+                displaySelectedTeam();
+                readyButton.remove();
+            })
+            .catch(error => console.error("Error al guardar el equipo:", error));
+        });        
 
-  const teamData = {
-      username: username,
-      team: pokemonTeam
-  };
-
-  fetch('/saveTeam', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(teamData)
-  })
-  .then(response => response.json())
-  .then(data => {
-      console.log("Equipo guardado automáticamente:", data);
-      console.log(`Equipo completo: ${pokemonTeam.map(pokemon => pokemon.name).join(', ')}`);
-      alert(`¡Equipo guardado exitosamente como "${username}"!`);
-
-      // Limpiar el equipo después de guardarlo
-      pokemonTeam = [];
-  })
-  .catch(error => console.error("Error al guardar el equipo:", error));
+        // Mostrar el botón "Ready" junto al equipo seleccionado
+        selectedTeamContainer.parentElement.appendChild(readyButton);
+    }
 }
 
 // Guardar Pokémon desde el botón "Seleccionar"
@@ -226,13 +247,12 @@ function displaySelectedTeam() {
 
         selectedTeamContainer.appendChild(card);
 
-        // Eliminar Pokémon del equipo
         const btnEliminar = card.querySelector(".btn-eliminar");
         btnEliminar.addEventListener("click", () => eliminarPokemon(pokemon.id));
     });
 }
 
-// Función para eliminar un Pokémon del equipo
+// Eliminar Pokémon del equipo
 function eliminarPokemon(id) {
     pokemonTeam = pokemonTeam.filter(pokemon => pokemon.id !== id);
     displaySelectedTeam(); // Actualizar la vista
